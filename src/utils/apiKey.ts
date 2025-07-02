@@ -67,7 +67,7 @@ export async function loadApiKey(providedKey?: string): Promise<string | null> {
 export async function storeApiKey(apiKey: string): Promise<void> {
   try {
     await keytar.setPassword(SERVICE_NAME, ACCOUNT_NAME, apiKey);
-  } catch (error) {
-    console.warn(`Warning: Could not store API key in keychain: ${error.message}`);
+  } catch (error: any) {
+    console.warn(`Warning: Could not store API key in keychain: ${error.message || 'Unknown error'}`);
   }
 }

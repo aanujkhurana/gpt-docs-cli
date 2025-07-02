@@ -66,13 +66,14 @@ export async function generateComment(options: GenerateCommentOptions): Promise<
     }
     
     return comment;
-  } catch (error) {
-    console.error(`OpenAI API error: ${error.message}`);
+  } catch (error: any) {
+    const errorMessage = error.message || 'Unknown error';
+    console.error(`OpenAI API error: ${errorMessage}`);
     if (error.response) {
       console.error(`Status: ${error.response.status}`);
       console.error(`Data: ${JSON.stringify(error.response.data)}`);
     }
-    throw new Error(`Failed to generate comment: ${error.message}`);
+    throw new Error(`Failed to generate comment: ${errorMessage}`);
   }
 }
 
@@ -107,7 +108,7 @@ function formatAsJSDoc(comment: string): string {
 async function callWithRetry<T>(fn: () => Promise<T>, retries = 3, delay = 1000): Promise<T> {
   try {
     return await fn();
-  } catch (error) {
+  } catch (error: any) {
     // Check if it's a rate limit error
     if (error.status === 429 && retries > 0) {
       // Get retry delay from response headers or use exponential backoff

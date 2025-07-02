@@ -73,8 +73,8 @@ export async function processFiles(options: ProcessOptions): Promise<void> {
     } else {
       spinner.fail(`Invalid path: ${options.path}`);
     }
-  } catch (error) {
-    spinner.fail(`Error processing files: ${error.message}`);
+  } catch (error: any) {
+    spinner.fail(`Error processing files: ${error.message || 'Unknown error'}`);
     throw error;
   }
 }
@@ -129,9 +129,9 @@ async function processFile(filePath: string, options: ProcessOptions): Promise<v
         console.log(chalk.gray(`Tokens used: ${totalTokensUsed}`));
       } else if (options.output) {
         // Save to output file
-        const outputPath = options.output === true ? 
+        const outputPath = typeof options.output === 'boolean' && options.output === true ? 
           `${filePath}.documented` : 
-          path.resolve(options.output, path.basename(filePath));
+          path.resolve(options.output as string, path.basename(filePath));
           
         await fs.writeFile(outputPath, modifiedContent, 'utf-8');
         console.log(chalk.green(`Created documented version: ${outputPath}`));
@@ -145,8 +145,8 @@ async function processFile(filePath: string, options: ProcessOptions): Promise<v
     } else {
       console.log(chalk.yellow(`No changes made to: ${filePath}`));
     }
-  } catch (error) {
-    console.error(chalk.red(`Error processing ${filePath}: ${error.message}`));
+  } catch (error: any) {
+    console.error(chalk.red(`Error processing ${filePath}: ${error.message || 'Unknown error'}`));
     throw error;
   }
 }

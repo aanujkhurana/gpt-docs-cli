@@ -3,7 +3,21 @@
 import { Command } from 'commander';
 import { processFiles } from './processor.js';
 import { loadApiKey } from './utils/apiKey.js';
-import { version } from '../package.json' assert { type: 'json' };
+// Import version from package.json
+// Using dynamic import for ESM compatibility
+let version = '1.0.0';
+try {
+  const { readFile } = await import('fs/promises');
+  const { fileURLToPath } = await import('url');
+  const { dirname, resolve } = await import('path');
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const packageJson = JSON.parse(
+    await readFile(resolve(__dirname, '../package.json'), 'utf-8')
+  );
+  version = packageJson.version;
+} catch (err) {
+  console.warn('Could not read package.json version, using default');
+}
 import chalk from 'chalk';
 
 // Define the CLI program
@@ -41,8 +55,8 @@ program
         output: options.output
       });
 
-    } catch (error) {
-      console.error(chalk.red(`Error: ${error.message}`));
+    } catch (error: any) {
+      console.error(chalk.red(`Error: ${error.message || 'Unknown error'}`));
       process.exit(1);
     }
   });
