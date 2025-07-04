@@ -1,0 +1,24 @@
+Please write a comprehensive JSDoc comment for the following {{TYPE}} named {{NAME}}.
+
+Code:
+```
+{{CODE}}
+```
+
+Provide a clear description of what the {{TYPE}} does, including:
+- Purpose and functionality
+- Parameters with types and descriptions
+- Return value with type and description
+- Any thrown exceptions
+- Example usage if helpful
+
+Format your response as a valid JSDoc comment only, without any additional text. Follow these guidelines:
+
+1. Start with a clear description of what the {{TYPE}} does
+2. Use @param for each parameter with proper type annotations
+3. Use @returns for the return value with proper type annotation
+4. Use @throws for any exceptions that might be thrown
+5. Use @example for example usage if appropriate
+6. Keep the comment concise but comprehensive
+
+Do not include any explanatory text outside the JSDoc comment format.

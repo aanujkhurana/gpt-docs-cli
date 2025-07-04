@@ -1,44 +1,52 @@
 {
-  "name": "gpt-docs-cli",
+  "name": "gpt-docs",
   "version": "1.0.0",
   "description": "CLI tool that uses OpenAI to automatically generate JSDoc-style comments for JavaScript/TypeScript code",
   "main": "dist/index.js",
   "bin": {
-    "gpt-docs": "./dist/index.js"
+    "gpt-docs": "./dist/bin/cli.js"
   },
-  "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/bin/cli.js",
+    "dev": "ts-node src/bin/cli.ts",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "prepare": "npm run build"
   },
   "keywords": [
-    "cli",
     "openai",
     "gpt",
     "documentation",
     "jsdoc",
     "typescript",
-    "javascript"
+    "javascript",
+    "cli"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "chalk": "^5.3.0",
-    "commander": "^11.1.0",
-    "dotenv": "^16.3.1",
+    "chalk": "^4.1.2",
+    "commander": "^10.0.1",
+    "dotenv": "^16.0.3",
+    "glob": "^10.0.0",
     "keytar": "^7.9.0",
-    "openai": "^4.20.1",
-    "ora": "^7.0.1",
-    "p-limit": "^4.0.0",
-    "typescript": "^5.3.2"
+    "openai": "^3.2.1",
+    "ora": "^5.4.1",
+    "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
+    "@types/glob": "^8.1.0",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.38.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=14.0.0"
   }
 }

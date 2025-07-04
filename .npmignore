@@ -1,0 +1,23 @@
+# Source files (only dist is needed)
+src/
+
+# Test files
+test.js
+examples/
+
+# Development configs
+tsconfig.json
+.gitignore
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS specific
+.DS_Store
+Thumbs.db
